@@ -15,7 +15,7 @@ double gauss(double**arr,int n){
         if(tmp[i][i]==0){
             int found=0;
             for(int k=i+1;k<n;k++){
-                if(tmp[k][i]){
+                if(tmp[k][i]!=0){
                     double *tmp1=tmp[i];
                     tmp[i]=tmp[k];
                     tmp[k]=tmp1;
@@ -45,4 +45,24 @@ double gauss(double**arr,int n){
     }
     free(tmp);
     return det;
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    double**arr=(double**)malloc(n*sizeof(double*));
+    for (int i=0;i<n;i++){
+        arr[i]=(double*)malloc(n*sizeof(double));
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            scanf("%lf",&arr[i][j]);
+        }
+    }
+    double det=gauss(arr,n);
+    printf("%lf",det);
+    for(int i=0;i<n;i++){
+        free(arr[i]);
+    }
+    free(arr);
+    return 0;
 }
